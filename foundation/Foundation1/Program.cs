@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<Video> videos = new List<Video>
+         List<Video> videos = new List<Video>
         {
             new Video("C# Programming Tutorial", "Code Academy", 600),
             new Video("Top 10 Coding Practices", "Dev Master", 900),

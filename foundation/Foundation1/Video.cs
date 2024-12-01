@@ -13,6 +13,10 @@ public class Video
         _comments = new List<Comment>();
     }
 
+    public string Title => _title;
+    public string Author => _author;
+    public int LengthInSeconds => _lengthInSeconds;
+
     public void AddComment(Comment comment)
     {
         _comments.Add(comment);
@@ -25,6 +29,6 @@ public class Video
 
     public List<Comment> GetComments()
     {
-        return _comments;
+        return new List<Comment>(_comments); 
     }
 }
