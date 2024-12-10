@@ -13,9 +13,18 @@ public class Video
         _comments = new List<Comment>();
     }
 
-    public string Title => _title;
-    public string Author => _author;
-    public int LengthInSeconds => _lengthInSeconds;
+    public string GetTitle() 
+    {
+        return _title;
+    }
+    public string GetAuthor()
+    {
+        return _author;
+    }
+    public int GetLengthInSeconds()
+    {
+        return _lengthInSeconds;
+    }
 
     public void AddComment(Comment comment)
     {

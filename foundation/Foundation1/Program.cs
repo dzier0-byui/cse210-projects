@@ -4,13 +4,15 @@ class Program
 {
     static void Main(string[] args)
     {
-         List<Video> videos = new List<Video>
-        {
-            new Video("C# Programming Tutorial", "Code Academy", 600),
-            new Video("Top 10 Coding Practices", "Dev Master", 900),
-            new Video("Beginner's Guide to OOP", "LearnCode", 720),
-            new Video("Advanced C# Techniques", "TechGuru", 1100)
-        };
+        List<Video> videos = new List<Video>();
+        Video video1 = new Video("C# Programming Tutorial", "Code Academy", 600);
+        Video video2 = new Video("Top 10 Coding Practices", "Dev Master", 900);
+        Video video3 = new Video("Beginner's Guide to OOP", "LearnCode", 720);
+        Video video4 = new Video("Advanced C# Techniques", "TechGuru", 1100);
+        videos.Add(video1);
+        videos.Add(video2);
+        videos.Add(video3);
+        videos.Add(video4);
 
         videos[0].AddComment(new Comment("Alice", "Great tutorial!"));
         videos[0].AddComment(new Comment("Bob", "Very helpful, thanks!"));
@@ -30,15 +32,15 @@ class Program
 
         foreach (var video in videos)
         {
-            Console.WriteLine($"Title: {video.Title}");
-            Console.WriteLine($"Author: {video.Author}");
-            Console.WriteLine($"Length: {video.LengthInSeconds} seconds");
+            Console.WriteLine($"Title: {video.GetTitle()}");
+            Console.WriteLine($"Author: {video.GetAuthor()}");
+            Console.WriteLine($"Length: {video.GetLengthInSeconds()} seconds");
             Console.WriteLine($"Number of Comments: {video.GetNumberOfComments()}");
 
             Console.WriteLine("Comments:");
             foreach (var comment in video.GetComments())
             {
-                Console.WriteLine($"- {comment.CommenterName}: {comment.Text}");
+                Console.WriteLine($"- {comment.GetCommenterName()}: {comment.GetCommentText()}");
             }
 
             Console.WriteLine();

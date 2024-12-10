@@ -8,7 +8,13 @@ public class Comment
         _commenterName = commenterName;
         _text = text;
     }
-
-    public string CommenterName => _commenterName;
-    public string Text => _text;
+    
+    public string GetCommenterName()
+    {
+        return _commenterName;
+    }
+    public string GetCommentText() 
+    {
+        return _text;
+    }
 }
