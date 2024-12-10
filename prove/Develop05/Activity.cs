@@ -45,7 +45,9 @@ public class Activity
     public void DisplayEndingMessage()
     {
         Console.WriteLine();
-        Console.WriteLine($"\nYou have completed the {_name} Activity. Well done!!");
+        Console.WriteLine($"\nWell done!!");
+        ShowSpinner(3);
+        Console.WriteLine($"You've completed the {_name} activity.");
         ShowSpinner(3);
         Console.WriteLine("Take a moment to reflect on how you feel now.\n");
         Console.Write("Press any enter to return to the menu");

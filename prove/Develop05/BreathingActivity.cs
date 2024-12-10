@@ -6,7 +6,8 @@ public class BreathingActivity : Activity
     {
         DisplayStartingMessage();
 
-        for (int i = 0; i < _duration / 6; i++)
+        int adjustedDuration = RoundUpToNearestSix(_duration);
+        for (int i = 0; i < adjustedDuration / 6; i++)
         {
             CountDown("in", 3);
             CountDown("out", 3);
@@ -25,5 +26,14 @@ public class BreathingActivity : Activity
         {
             ShowCountDown("Breathe out ...", seconds);
         }
+    }
+
+    private int RoundUpToNearestSix(int value)
+    {
+        if (value % 6 == 0)
+        {
+            return value;
+        }
+        return ((value / 6) + 1) * 6;
     }
 }
