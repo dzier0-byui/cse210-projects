@@ -6,12 +6,13 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("\nChoose an activity to begin:");
+            Console.Clear();
+            Console.WriteLine("\nMenu Options:");
             Console.WriteLine("1. Breathing Activity");
             Console.WriteLine("2. Listing Activity");
             Console.WriteLine("3. Reflecting Activity");
             Console.WriteLine("4. Quit");
-            Console.Write("Your choice: ");
+            Console.Write("Select an activity from the menu: ");
 
             string input = Console.ReadLine();
             System.Console.Clear();
@@ -21,7 +22,6 @@ class Program
                 Console.WriteLine("\nThank you for using the Mindfulness Program. Goodbye!");
                 break;
             }
-
 
             switch (input)
             {

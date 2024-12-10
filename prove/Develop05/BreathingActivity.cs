@@ -1,19 +1,33 @@
 public class BreathingActivity : Activity
 {
-    public BreathingActivity() : base("Breathing", "Focus on your breathing to relax and center yourself.", 60) { }
+    public BreathingActivity() : base("Breathing", "This activity will help you relax by walking through breathing in and out slowly. Clear your mind and focus on your breathing.", 60) { }
 
     public void Run()
     {
         DisplayStartingMessage();
 
-        for (int i = 0; i < _duration / 10; i++)
+        for (int i = 0; i < _duration / 6; i++)
         {
-            Console.WriteLine("Breathe in...");
-            ShowCountDown(4);
-            Console.WriteLine("Now breathe out...");
-            ShowCountDown(4);
+            CountDown("in", 3);
+            CountDown("out", 3);
         }
 
         DisplayEndingMessage();
+    }
+
+    public void CountDown(string inOrOut, int seconds)
+    {
+        for (int i = seconds; i > 0; i--)
+        {
+            if (inOrOut.ToLower() == "in")
+            {
+                Console.Write($"\rBreathe in  ...{i}");
+            }
+            else 
+            {
+                Console.Write($"\rBreathe out ...{i}");
+            }
+            Thread.Sleep(1000);
+        }
     }
 }
