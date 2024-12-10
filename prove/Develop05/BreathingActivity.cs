@@ -2,7 +2,7 @@ public class BreathingActivity : Activity
 {
     public BreathingActivity() : base("Breathing", "Focus on your breathing to relax and center yourself.", 60) { }
 
-    public override void Run()
+    public void Run()
     {
         DisplayStartingMessage();
 

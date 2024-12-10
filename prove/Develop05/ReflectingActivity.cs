@@ -45,7 +45,7 @@ public class ReflectingActivity : Activity
         }
     }
 
-    public override void Run()
+    public void Run()
     {
         DisplayStartingMessage();
 

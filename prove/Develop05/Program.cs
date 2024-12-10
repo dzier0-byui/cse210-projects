@@ -1,5 +1,3 @@
-using System;
-
 class Program
 {
     static void Main(string[] args)
@@ -16,6 +14,7 @@ class Program
             Console.Write("Your choice: ");
 
             string input = Console.ReadLine();
+            System.Console.Clear();
 
             if (input == "4")
             {
@@ -23,26 +22,25 @@ class Program
                 break;
             }
 
-            Activity selectedActivity;
 
             switch (input)
             {
                 case "1":
-                    selectedActivity = new BreathingActivity();
+                    BreathingActivity breathingActivity = new BreathingActivity();
+                    breathingActivity.Run();
                     break;
                 case "2":
-                    selectedActivity = new ListingActivity();
+                    ListingActivity listingActivity = new ListingActivity();
+                    listingActivity.Run();
                     break;
                 case "3":
-                    selectedActivity = new ReflectingActivity();
+                    ReflectingActivity reflectingActivity = new ReflectingActivity();
+                    reflectingActivity.Run();
                     break;
                 default:
                     Console.WriteLine("\nInvalid choice. Please select a valid option.");
                     continue;
             }
-
-            selectedActivity.Run();
         }
-
     }
 }

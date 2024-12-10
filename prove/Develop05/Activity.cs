@@ -51,9 +51,4 @@ public class Activity
         }
         Console.WriteLine();
     }
-
-    public virtual void Run()
-    {
-        throw new NotImplementedException("Run method must be implemented in derived classes.");
-    }
 }
