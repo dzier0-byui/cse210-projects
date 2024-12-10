@@ -1,9 +1,9 @@
 public class Product
 {
-    private string _name { get; set; }
-    private string _productId { get; set; }
-    private decimal _price { get; set; }
-    private int _quantity { get; set; }
+    private string _name;
+    private string _productId;
+    private decimal _price;
+    private int _quantity;
 
     public Product(string name, string productId, decimal price, int quantity)
     {
@@ -11,6 +11,26 @@ public class Product
         _productId = productId;
         _price = price;
         _quantity = quantity;
+    }
+
+    public string GetName()
+    {
+        return _name;
+    }
+
+    public string GetProductId()
+    {
+        return _productId;
+    }
+
+    public decimal GetPrice()
+    {
+        return _price;
+    }
+
+    public int GetQuantity()
+    {
+        return _quantity;
     }
 
     public decimal GetTotalCost()

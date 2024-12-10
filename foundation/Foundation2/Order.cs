@@ -22,7 +22,16 @@ public class Order
             productTotal += product.GetTotalCost();
         }
 
-        decimal shippingCost = _orderCustomer.LivesInUSA() ? 5 : 35;
+        bool livesInUSA = _orderCustomer.LivesInUSA();
+        decimal shippingCost;
+        if (livesInUSA)
+        {
+            shippingCost = 5;
+        }
+        else
+        {
+            shippingCost = 35;
+        }
         return productTotal + shippingCost;
     }
 
