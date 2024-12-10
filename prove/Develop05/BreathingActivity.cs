@@ -17,17 +17,13 @@ public class BreathingActivity : Activity
 
     public void CountDown(string inOrOut, int seconds)
     {
-        for (int i = seconds; i > 0; i--)
+        if (inOrOut.ToLower() == "in")
         {
-            if (inOrOut.ToLower() == "in")
-            {
-                Console.Write($"\rBreathe in  ...{i}");
-            }
-            else 
-            {
-                Console.Write($"\rBreathe out ...{i}");
-            }
-            Thread.Sleep(1000);
+            ShowCountDown("Breathe in  ...", seconds);
+        }
+        else 
+        {
+            ShowCountDown("Breathe out ...", seconds);
         }
     }
 }

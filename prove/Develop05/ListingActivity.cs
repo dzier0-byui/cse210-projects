@@ -8,7 +8,7 @@ public class ListingActivity : Activity
         "List the people who have positively impacted your life."
     };
 
-    public ListingActivity() : base("Listing", "Reflect on and list items based on the given prompt.", 60) { }
+    public ListingActivity() : base("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.", 60) { }
 
     private string GetRandomPrompt()
     {
@@ -37,7 +37,6 @@ public class ListingActivity : Activity
         string prompt = GetRandomPrompt();
         Console.WriteLine($"Prompt: {prompt}\n");
 
-        ShowCountDown(3);
         List<string> responses = GetListFromUser();
 
         _count = responses.Count;

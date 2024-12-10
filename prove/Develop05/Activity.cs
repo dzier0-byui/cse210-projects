@@ -39,13 +39,14 @@ public class Activity
         
         Console.WriteLine("Get ready...");
         ShowSpinner(4);
-        System.Console.WriteLine();
+        Console.Clear();
     }
 
     public void DisplayEndingMessage()
     {
         Console.WriteLine();
-        Console.WriteLine($"\nYou have completed the {_name} Activity. Well done!");
+        Console.WriteLine($"\nYou have completed the {_name} Activity. Well done!!");
+        ShowSpinner(3);
         Console.WriteLine("Take a moment to reflect on how you feel now.\n");
         Console.Write("Press any enter to return to the menu");
         Console.ReadLine();
@@ -67,11 +68,11 @@ public class Activity
         }
     }
 
-    public void ShowCountDown(int seconds)
+    public void ShowCountDown(string countDownString, int seconds)
     {
         for (int i = seconds; i > 0; i--)
         {
-            Console.Write($"\rStarting in {i}...");
+            Console.Write($"\r{countDownString} {i}");
             Thread.Sleep(1000);
         }
         Console.WriteLine();
