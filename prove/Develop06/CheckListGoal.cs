@@ -1,32 +1,44 @@
+using System.Runtime.InteropServices;
+
 public class CheckListGoal: Goal
 {
     private int _amountCompleted;
+    private bool _isComplete;
     private int _target;
     private int _bonus;
 
     public CheckListGoal(string name, string description, int points, int target, int bonus): base(name, description, points)
     {
+        _isComplete = false;
+        _amountCompleted = 0;
         _target = target;
         _bonus = bonus;
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
-        throw new NotImplementedException();
+        int points = GetPoints();
+        _amountCompleted += 1;
+        if (_amountCompleted == _target)
+        {
+            points += _bonus;
+            _isComplete = true;
+        }
+        return points;
     }
 
     public override bool IsComplete()
     {
-        throw new NotImplementedException();
+        return _isComplete;
     }
 
     public override string GetDetailsString()
     {
-        return base.GetDetailsString();
+        return base.GetDetailsString() + $" - {_amountCompleted}/{_target} complete";
     }
 
     public override string GetStringRepresentation()
     {
-        throw new NotImplementedException();
+        return $"CheckListGoal|{GetName()}|{GetDescription()}|{GetPoints()}|{_bonus}|{_isComplete}";
     }
 }
