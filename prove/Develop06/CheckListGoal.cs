@@ -21,6 +21,7 @@ public class CheckListGoal: Goal
         _amountCompleted += 1;
         if (_amountCompleted == _target)
         {
+            Console.WriteLine($"Congrats!! You {GetDescription()} {_target} times and earned {_bonus} bonus points.");
             points += _bonus;
             _isComplete = true;
         }
@@ -34,7 +35,7 @@ public class CheckListGoal: Goal
 
     public override string GetDetailsString()
     {
-        return base.GetDetailsString() + $" - {_amountCompleted}/{_target} complete";
+        return base.GetDetailsString() + $" -- {_amountCompleted}/{_target} complete";
     }
 
     public override string GetStringRepresentation()

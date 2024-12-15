@@ -3,12 +3,17 @@ public class GoalManager
     private List<Goal> _goals;
     private int _score;
 
-    public GoalManager() { }
+    public GoalManager() 
+    { 
+        _goals = new List<Goal>();
+        _score = 0;
+    }
 
     public void Start()
     {
+        LoadGoals();
         Console.WriteLine("Welcome to the Goal Tracking Program!");
-        List<Goal> goals = new List<Goal>();
+        DisplayPlayerInfo();
 
         while (true)
         {
@@ -33,13 +38,16 @@ public class GoalManager
             switch (input)
             {
                 case "1":
-                    CreateGoal(goals);
+                    CreateGoal();
                     break;
                 case "2":
-                    ListGoalNames();
+                    ListGoalDetials();
                     break;
                 case "3":
-                    
+                    SaveGoals();
+                    break;
+                case "4":
+                    RecordEvent();
                     break;
                 default:
                     Console.WriteLine("\nInvalid choice. Please select a valid option.");
@@ -50,20 +58,32 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-
+        Console.WriteLine($"\nCurrent Score: {_score}");
     }
 
     public void ListGoalNames()
     {
-
+        Console.Clear();
+        Console.WriteLine("Your goals are:\n");
+        for (int i = 0; i < _goals.Count(); i++)
+        {
+            Console.WriteLine($"{i+1}. {_goals[i].GetName()}");
+        }
     }
 
     public void ListGoalDetials()
     {
-
+        Console.Clear();
+        Console.WriteLine("Your goals are:\n");
+        foreach (Goal goal in _goals)
+        {
+            Console.WriteLine(goal.GetDetailsString());
+        }
+        
+        DisplayPlayerInfo();
     }
 
-    public void CreateGoal(List<Goal> goals)
+    public void CreateGoal()
     {
         Console.WriteLine("\nThe Types of Goals are:");
         Console.WriteLine("1. Simple Goal");
@@ -102,11 +122,11 @@ public class GoalManager
         {
             case "1":
                 SimpleGoal simpleGoal = new SimpleGoal(name, description, points);
-                goals.Add(simpleGoal);
+                _goals.Add(simpleGoal);
                 break;
             case "2":
                 EternalGoal eternalGoal = new EternalGoal(name, description, points);
-                goals.Add(eternalGoal);
+                _goals.Add(eternalGoal);
                 break;
             case "3":
                 int target = 0;
@@ -142,7 +162,7 @@ public class GoalManager
                 }
 
                 CheckListGoal checkListGoal = new CheckListGoal(name, description, points, target, bonusPoints);
-                goals.Add(checkListGoal);
+                _goals.Add(checkListGoal);
                 break;
             default:
                 Console.WriteLine("\nInvalid choice.");
@@ -152,7 +172,38 @@ public class GoalManager
 
     public void RecordEvent()
     {
+        Console.Clear();
+        ListGoalNames();
+        int goalNumber = 0;
+        while (true)
+        {
+            Console.WriteLine("Which goal did you accomplish? ");
+            string stringGoal = Console.ReadLine();
 
+            if (int.TryParse(stringGoal, out int intGoal))
+            {
+                if (intGoal > _goals.Count())
+                {
+                    Console.WriteLine("\nInput too high. Enter a number for one of your goals.");
+                }
+                else
+                {
+                    goalNumber = intGoal;
+                    break;
+                }
+            }
+            else {
+                Console.WriteLine("\nInvalid input. Enter a number.");
+            }
+        }
+
+        Goal completedGoal = _goals[goalNumber - 1];
+
+        Console.WriteLine($"Congratulations! You have earned {completedGoal.GetPoints()} points");
+        int pointsAdded = completedGoal.RecordEvent();
+        _score += pointsAdded;
+
+        DisplayPlayerInfo();
     }
 
     public void SaveGoals()
