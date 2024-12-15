@@ -11,8 +11,6 @@ public class GoalManager
 
     public void Start()
     {
-        LoadGoals();
-
         while (true)
         {
             Console.Clear();
@@ -22,14 +20,15 @@ public class GoalManager
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
             Console.WriteLine("3. Save Goals");
-            Console.WriteLine("4. Record Event");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("4. Load Goals");
+            Console.WriteLine("5. Record Event");
+            Console.WriteLine("6. Quit");
             Console.Write("Select a choice from the menu: ");
 
             string input = Console.ReadLine();
             System.Console.Clear();
 
-            if (input == "5")
+            if (input == "6")
             {
                 Console.WriteLine("\nThank you for using the Goal Tracking program. Goodbye!");
                 break;
@@ -47,6 +46,9 @@ public class GoalManager
                     SaveGoals();
                     break;
                 case "4":
+                    LoadGoals();
+                    break;
+                case "5":
                     RecordEvent();
                     break;
                 default:
@@ -222,16 +224,98 @@ public class GoalManager
         _score += pointsAdded;
 
         DisplayPlayerInfo();
+
+        Console.WriteLine("Goal achieved. Press enter to continue...");
+        Console.ReadLine();
     }
 
     public void SaveGoals()
     {
+        Console.Write("What is the file name you want to save it to? ");
+        string fileName = Console.ReadLine();
 
+        List<string> lines = new List<string>();
+        fileName = System.IO.Path.ChangeExtension(fileName, ".txt");
+
+        lines.Add($"CurrentScore|{_score}");
+
+        foreach (var goal in _goals)
+        {
+            lines.Add(goal.GetStringRepresentation());
+        }
+
+        System.IO.File.WriteAllLines(fileName, lines);
+
+        Console.WriteLine($"Goals saved to {fileName} successfully.");
     }
 
     public void LoadGoals()
     {
-        
+        Console.Write("What is the file name you want to load your goals from? ");
+        string fileName = Console.ReadLine();
+
+        try
+        {
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            _goals.Clear();
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split('|');
+
+                string goalType = parts[0];
+                if (goalType == "SimpleGoal")
+                {
+                    string name = parts[1];
+                    string description = parts[2];
+                    int points = int.Parse(parts[3]);
+                    bool isComplete = bool.Parse(parts[4]);
+
+                    var simpleGoal = new SimpleGoal(name, description, points);
+                    if (isComplete)
+                    {
+                        simpleGoal.RecordEvent();
+                    }
+                    _goals.Add(simpleGoal);
+                }
+                else if (goalType == "EternalGoal")
+                {
+                    string name = parts[1];
+                    string description = parts[2];
+                    int points = int.Parse(parts[3]);
+
+                    var eternalGoal = new EternalGoal(name, description, points);
+                    _goals.Add(eternalGoal);
+                }
+                else if (goalType == "CheckListGoal")
+                {
+                    string name = parts[1];
+                    string description = parts[2];
+                    int points = int.Parse(parts[3]);
+                    int target = int.Parse(parts[4]);
+                    int bonus = int.Parse(parts[5]);
+                    int amountCompleted = int.Parse(parts[6]);
+
+                    var checkListGoal = new CheckListGoal(name, description, points, target, bonus);
+                    for (int i = 0; i < amountCompleted; i++)
+                    {
+                        checkListGoal.RecordEvent();
+                    }
+                    _goals.Add(checkListGoal);
+                }
+                else if (goalType == "CurrentScore")
+                {
+                    _score = int.Parse(parts[1]);
+                }
+            }
+
+            Console.WriteLine($"Goals loaded successfully from {fileName}.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred while loading goals: {ex.Message}");
+        }
     }
 
 

@@ -1,4 +1,4 @@
-using System;
+//to exceed the requirements I added a celebration when completing the check list goal
 
 class Program
 {

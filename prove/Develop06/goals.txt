@@ -1,0 +1,4 @@
+CurrentScore|370
+SimpleGoal|Go to church|attend a ward on sunday|30|True
+CheckListGoal|RUN MARATHON|runnnnnnnnn|300|2|5000|1
+EternalGoal|Read Book of Mormon|study BOM every morning|40
